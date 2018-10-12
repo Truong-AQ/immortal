@@ -186,6 +186,6 @@ public class Btl {
     public static void main(String[] args) {
         // TODO code application logic here
         DictionayCommandLine t = new DictionayCommandLine();
-        
+        t.DictionaryAdvanced();
     }    
 }
