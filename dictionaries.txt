@@ -1,4 +1,0 @@
-dog	con chó
-school	trường hoc
-student	học sinh
-teacher	giáo viên
