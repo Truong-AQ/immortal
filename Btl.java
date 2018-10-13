@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package btl;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -20,6 +20,9 @@ class Word{
     public Word(String word_target, String word_explain) {
         this.word_target = word_target;
         this.word_explain = word_explain;
+    }
+
+    public Word() {
     }
 
     public String getWord_target() {
@@ -37,9 +40,28 @@ class Word{
     public void setWord_explain(String word_explain) {
         this.word_explain = word_explain;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 13 * hash + Objects.hashCode(this.word_target);
+        hash = 13 * hash + Objects.hashCode(this.word_explain);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Word){
+            Word w = (Word) obj;
+            return (this.word_target.equals(w.getWord_target())
+                    && this.word_explain.equals(w.getWord_explain()));
+        }
+        return false;
+    }
     
 }
 
+@SuppressWarnings("serial")
 class Dictionary extends Vector <Word>{
 
     public Dictionary(int initialCapacity) {
@@ -50,33 +72,41 @@ class Dictionary extends Vector <Word>{
     }    
 }
 class DictionaryManagement{
-    Dictionary my;
+    Dictionary td;
 
-    public Dictionary getMy() {
-        return my;
+    public DictionaryManagement(Dictionary td) {
+        this.td = td;
     }
 
-    public void setMy(Dictionary my) {
-        this.my = my;
+    public DictionaryManagement() {
+        td = new Dictionary();
     }
-    
+
+    public Dictionary getTd() {
+        return td;
+    }
+
+    public void setTd(Dictionary td) {
+        this.td = td;
+    }
+    //doc du lieu tu ban phim
     public void insertFromCommandline(){
         Scanner input = new Scanner(System.in);
-        my = new Dictionary(input.nextInt());
+        int n = input.nextInt();
         input.nextLine();
-        for(int i = 0;i < my.size();i ++)
-            my.add(i, new Word(input.nextLine(), input.nextLine()));
+        for(int i = 0;i < n;i ++)
+            td.add(i, new Word(input.nextLine(), input.nextLine()));
     }
+    //doc du lieu tu file
     public void insertFromFile(){
         File file = new File("dictionaries.txt");
-        my = new Dictionary();
         try(Scanner sc = new Scanner(file)){
             String s;
             while(sc.hasNext()){
                 s = sc.nextLine();
                 for(int i = 0;i < s.length();i ++)
                     if(s.charAt(i) == 9){
-                        my.add(new Word(s.substring(0, i), s.substring(i + 1)));
+                        td.add(new Word(s.substring(0, i), s.substring(i + 1)));
                         break;
                     }
             }
@@ -84,10 +114,11 @@ class DictionaryManagement{
             
         }
     }
+    //tim vi tri tu tieng anh trong tu dien
     public int dictionaryLookup(String word_target){
-        int vt1 = 0, vt2 = my.size() - 1;
+        int vt1 = 0, vt2 = td.size() - 1;
         while(vt1 <= vt2){
-            int vttg = (vt1 + vt2)/2, kq = my.elementAt(vttg).getWord_target().compareTo(word_target);
+            int vttg = (vt1 + vt2)/2, kq = td.elementAt(vttg).getWord_target().compareTo(word_target);
             if(kq == 0)
                 return vttg;
             else if(kq < 0){
@@ -97,84 +128,92 @@ class DictionaryManagement{
                 vt2 = vttg - 1;
             }
         }
-        return vt2;
+        return vt2;//tra ve vi tri tu be hon gan nhat tu can tim trong tu dien
     }
+    //ghi du lieu tu dien vao file
     public void dictionaryExportToFile(){
         File file = new File("dictionaries.txt");
         char c = 9;
         try(PrintWriter pw = new PrintWriter(file)) {
-           for(int i = 0;i < my.size();i ++){
-               pw.println(my.elementAt(i).getWord_target() + c + my.elementAt(i).getWord_explain());
+           for(int i = 0;i < td.size();i ++){
+               pw.println(td.elementAt(i).getWord_target() + c + td.elementAt(i).getWord_explain());
            }
         } catch (Exception e) {
         }
     }
+    //them tu w vao tu dien
     public void push(Word w){
         int vt = this.dictionaryLookup(w.getWord_target());
         if(vt == -1)
-            my.add(0, w);
+            td.add(0, w);
         else if(vt != -1)
-        if(!my.elementAt(vt).equals(w))
-        my.add(vt + 1, w);
+        if(!td.elementAt(vt).equals(w))
+        td.add(vt + 1, w);
     }
+    //loai tu w khoi tu dien
     public void remove(Word w){
         int vt = dictionaryLookup(w.getWord_target());
-        if(my.elementAt(vt).equals(w))
-        my.remove(vt);
+        if(vt != -1){
+            if(td.elementAt(vt).equals(w))
+                td.remove(vt);
+        }
     }
-    public void repair(Word w, Word q){//sua tu q thanh w
+    //sua tu w trong tu dien thanh tu q
+    public void repair(Word w, Word q){
         int vt = dictionaryLookup(w.getWord_target());
-        if(my.elementAt(vt).equals(w)){
-            my.elementAt(vt).setWord_target(q.getWord_target());
-            my.elementAt(vt).setWord_explain(q.getWord_explain());
+        if(vt != -1){
+            if(td.elementAt(vt).equals(w)){
+            td.elementAt(vt).setWord_target(q.getWord_target());
+            td.elementAt(vt).setWord_explain(q.getWord_explain());
+            }
         }
     }
 }
-class DictionaryCommandline extends DictionaryManagement{
+class DictionayCommandLine extends DictionaryManagement{
+    //hien thi danh sach tu dien
     public void showAllWords(){
-        System.out.println("English |     |  Vietnam");
-        for (Word j : my) {
-            System.out.println(j.getWord_target() + "  |     |  " + j.getWord_explain());
+        char c = 9;
+        System.out.println("English|" + c + "|Vietnam");
+        for (int j = 0;j < td.size();j ++) {
+            System.out.println(td.elementAt(j).getWord_target() + "|" + c + "|" + td.elementAt(j).getWord_explain());
         }
     }
-}
-class DictionayCommandLine extends DictionaryCommandline{
     public void DictionaryBasic(){
         this.insertFromCommandline();
         this.showAllWords();
     }
     public void DictionaryAdvanced(){
         this.insertFromFile();
+        System.out.println("Hien thi tu dien: ");
         this.showAllWords();
+        System.out.println("Nhap tu can tra: ");
         String s;
         Scanner sc = new Scanner(System.in);
         s = sc.nextLine();
         int vt = this.dictionaryLookup(s);
         if(vt != -1)
-        if(my.elementAt(vt).getWord_target().equals(s))
-        System.out.println(my.elementAt(vt).getWord_explain());
-    }
-    public void dictionarySeacher(String s){
-        int vt1 = 0, vt2 = my.size() - 1, lS = s.length();
-        while(vt1 <= vt2){
-            int vttg = (vt1 + vt2)/2, kq = my.elementAt(vttg).getWord_target().substring(0, lS).compareTo(s);
-            if(kq == 0){
-                for(int i = vttg;i >= 0;i --)
-                    if(my.elementAt(i).getWord_target().substring(0, lS).compareTo(s) != 0){
-                        vttg = i + 1;
-                        break;
-                    }
-                    else if(i == 0)
-                        vttg = 0;
-                for(int i = vttg;i < my.size();i ++)
-                    if(my.elementAt(i).getWord_target().substring(0, lS).compareTo(s) == 0)
-                        System.out.println(my.elementAt(i).getWord_target());
+            if(td.elementAt(vt).getWord_target().equals(s)){
+                System.out.println(td.elementAt(vt).getWord_explain());
                 return;
             }
-            if(kq < 0)
-                vt1 = vttg + 1;
+        System.out.println("Khong tim thay tu " + s);
+    }
+    //ham hien thi danh sach tu goi y
+    public void dictionarySeacher(String s){
+        int vt = this.dictionaryLookup(s), l = s.length();
+        int n = 5;//so tu goi y toi da can hien thi
+        for(int j = vt + 1;j < td.size() ;j ++){
+            if(n == 0)
+                break;
+            if(td.elementAt(j).getWord_target().length() >= l){
+                if(td.elementAt(j).getWord_target().substring(0, l).equals(s))
+                    System.out.println(td.elementAt(j).getWord_target());
+                else
+                    break;
+            }
             else
-                vt2 = vttg - 1;
+                break;
+            n --;
         }
     }
 }
@@ -187,5 +226,24 @@ public class Btl {
         // TODO code application logic here
         DictionayCommandLine t = new DictionayCommandLine();
         t.DictionaryAdvanced();
+        System.out.println("Nhap tu can them (Tieng Anh / Tieng Viet): ");
+        Scanner ip = new Scanner(System.in);
+        t.push(new Word(ip.nextLine(), ip.nextLine()));
+        System.out.println("Tu dien sau khi them: ");
+        t.showAllWords();
+        System.out.println("Nhap tu can xoa (Tieng Anh / Tieng Viet): ");
+        t.remove(new Word(ip.nextLine(), ip.nextLine()));
+        System.out.println("Tu dien sau khi xoa: ");
+        t.showAllWords();
+        System.out.println("Nhap tu can sua (Tieng Anh / Tieng Viet): ");
+        Word w = new Word(ip.nextLine(), ip.nextLine());
+        System.out.println("Ban muon sua tu do thanh tu (Tieng Anh / Tieng Viet): ");
+        t.repair(w, new Word(ip.nextLine(), ip.nextLine()));
+        System.out.println("Tu dien sau khi sua: ");
+        t.showAllWords();
+        System.out.println("Nhap tu ban muon biet goi y: ");
+        String s = ip.nextLine();
+        System.out.println("Goi y cua ban la: ");
+        t.dictionarySeacher(s);
     }    
 }
