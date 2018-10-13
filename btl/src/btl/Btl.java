@@ -135,7 +135,7 @@ class DictionaryManagement{
     }
     //ghi du lieu tu dien vao file
     public void dictionaryExportToFile(){
-        File file = new File("dictionaries.txt");
+        File file = new File("C:\\Users\\Genius\\Documents\\NetBeansProjects\\btl\\src\\btl\\dictionaries.txt");
         char c = 9;
         try(PrintWriter pw = new PrintWriter(file)) {
            for(int i = 0;i < td.size();i ++){
@@ -171,6 +171,7 @@ class DictionaryManagement{
             }
         }
     }
+    
 }
 class DictionayCommandLine extends DictionaryManagement{
     //hien thi danh sach tu dien
@@ -187,9 +188,9 @@ class DictionayCommandLine extends DictionaryManagement{
     }
     public void DictionaryAdvanced(){
         this.insertFromFile();
-        System.out.println("Hien thi tu dien: ");
+        System.out.println("Hiển thị từ điển: ");
         this.showAllWords();
-        System.out.println("Nhap tu can tra: ");
+        System.out.println("Nhập từ cần tra: ");
         String s;
         Scanner sc = new Scanner(System.in);
         s = sc.nextLine();
@@ -199,7 +200,7 @@ class DictionayCommandLine extends DictionaryManagement{
                 System.out.println(td.elementAt(vt).getWord_explain());
                 return;
             }
-        System.out.println("Khong tim thay tu " + s);
+        System.out.println("Không tìm thấy từ " + s);
     }
     //ham hien thi danh sach tu goi y
     public void dictionarySeacher(String s){
@@ -219,6 +220,18 @@ class DictionayCommandLine extends DictionaryManagement{
             n --;
         }
     }
+    //ham hien thi nghia cua tu da cho
+    public void search(String s){
+        int vt = this.dictionaryLookup(s);
+        if(vt != -1)
+            if(td.elementAt(vt).getWord_target().equals(s)){
+                System.out.println("Nghĩa tiếng Việt từ của bạn là: " + td.elementAt(vt).getWord_explain());
+                return;
+            }
+        System.out.println("Không tìm thấy từ " + s);
+        System.out.println("Có các từ gợi ý sau cho bạn là: ");
+        this.dictionarySeacher(s);
+    }
 }
 public class Btl {
 
@@ -228,25 +241,44 @@ public class Btl {
     public static void main(String[] args) {
         // TODO code application logic here
         DictionayCommandLine t = new DictionayCommandLine();
-        t.DictionaryAdvanced();
-        System.out.println("Nhap tu can them (Tieng Anh / Tieng Viet): ");
-        Scanner ip = new Scanner(System.in);
-        t.push(new Word(ip.nextLine(), ip.nextLine()));
-        System.out.println("Tu dien sau khi them: ");
-        t.showAllWords();
-        System.out.println("Nhap tu can xoa (Tieng Anh / Tieng Viet): ");
-        t.remove(new Word(ip.nextLine(), ip.nextLine()));
-        System.out.println("Tu dien sau khi xoa: ");
-        t.showAllWords();
-        System.out.println("Nhap tu can sua (Tieng Anh / Tieng Viet): ");
-        Word w = new Word(ip.nextLine(), ip.nextLine());
-        System.out.println("Ban muon sua tu do thanh tu (Tieng Anh / Tieng Viet): ");
-        t.repair(w, new Word(ip.nextLine(), ip.nextLine()));
-        System.out.println("Tu dien sau khi sua: ");
-        t.showAllWords();
-        System.out.println("Nhap tu ban muon biet goi y: ");
-        String s = ip.nextLine();
-        System.out.println("Goi y cua ban la: ");
-        t.dictionarySeacher(s);
+        t.insertFromFile();
+        String menu = "1. Thêm từ\n2. Xóa từ\n3. Sửa từ\n4. Tra từ\n5. Dừng\n\nMời bạn chọn:";
+        Scanner sc = new Scanner(System.in);
+        int lenh = 0;
+        OUTER:
+        while (true) {
+            System.out.println(menu);
+            //xu li khong nhap vao so
+            try {
+                lenh = sc.nextInt();
+            } catch (Exception e) {
+                lenh = 0;
+            }
+            sc.nextLine();
+            switch (lenh) {
+                case 1:
+                    System.out.println("Nhập từ cần thêm (Tiếng Anh / Tiếng Việt): ");
+                    t.push(new Word(sc.nextLine(), sc.nextLine()));
+                    break;
+                case 2:
+                    System.out.println("Nhập từ cần xóa (Tiếng Anh / Tiếng Việt): ");
+                    t.remove(new Word(sc.nextLine(), sc.nextLine()));
+                    break;
+                case 3:
+                    System.out.println("Nhập từ cần sửa (Tiếng Anh / Tiếng Việt): ");
+                    Word w = new Word(sc.nextLine(), sc.nextLine());
+                    System.out.println("Bạn muốn sửa từ đó thành từ (Tiếng Anh / Tiếng Việt): ");
+                    t.repair(w, new Word(sc.nextLine(), sc.nextLine()));
+                    break;
+                case 4:
+                    System.out.println("Nhập từ tiếng Anh bạn muốn tra: ");
+                    t.search(sc.nextLine());
+                    break;
+                case 5:
+                    break OUTER;
+                default:
+                    break;
+            }
+        }
     }    
 }
