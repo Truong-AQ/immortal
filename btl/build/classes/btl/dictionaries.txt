@@ -1,0 +1,8 @@
+hello	xin chao
+pig	con heo
+school	truong hoc
+sea	dai duong
+search	tim kiem
+sky	bau troi
+student	hoc sinh
+teacher	giao vien
