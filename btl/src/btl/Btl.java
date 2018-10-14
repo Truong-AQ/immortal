@@ -240,6 +240,7 @@ public class Btl {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        DictionayCommandLine t = new DictionayCommandLine();
         t.insertFromFile();
         String menu = "1. Thêm từ\n2. Xóa từ\n3. Sửa từ\n4. Tra từ\n5. Dừng\n\nMời bạn chọn:";
         Scanner sc = new Scanner(System.in);
