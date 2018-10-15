@@ -11,8 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 class AcessDatabase {
 
@@ -22,17 +22,15 @@ class AcessDatabase {
         return con;
     }
     
-    public String readDatabase(String word) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+   public static List<Dictionary> readDatabase() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<Dictionary> listDict = new ArrayList<>();
         Statement state = collectionDatabase().createStatement();
-        String sql = "select * from tbl_edict where word LIKE "+"'"+word+"'"+";";
+        String sql = "select * from tbl_edict;";
         ResultSet rs = state.executeQuery(sql);
         while (rs.next()) {
-             String wor=rs.getString(3);
-                String var1 = wor.replaceAll("<C><F><I><N><Q>", "\n    ");
-                String var2 = var1.replaceAll("<br />", "\n    ");
-                word = var2.replaceAll("</Q></N></I></F></C>", "");
- 
+            Dictionary dict = new Dictionary(rs.getInt(1), rs.getString(2), rs.getString(3));
+            listDict.add(dict);
         }
-        return word;
+        return listDict;
     }
 }

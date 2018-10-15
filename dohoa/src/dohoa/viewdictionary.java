@@ -5,7 +5,10 @@
  */
 package dohoa;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -14,9 +17,19 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class viewdictonary extends javax.swing.JFrame{
+public class viewdictionary extends javax.swing.JFrame{
+    
+    public static List<Dictionary> listDict;
+    public static viewInsert windowInsert = new viewInsert();
 
-    public viewdictonary() {
+
+    public viewdictionary() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 4, screenHeight / 4);
+        this.setResizable(false);
         initComponents();
      
     }
@@ -37,6 +50,16 @@ public class viewdictonary extends javax.swing.JFrame{
         jPanel4 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -48,6 +71,11 @@ public class viewdictonary extends javax.swing.JFrame{
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +122,24 @@ public class viewdictonary extends javax.swing.JFrame{
         });
 
         jLabel1.setText("jLabel1");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
+
+        jMenu7.setText("File");
+        jMenuBar4.add(jMenu7);
+
+        jMenu8.setText("Edit");
+        jMenuBar4.add(jMenu8);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DICTIONARY");
@@ -191,9 +237,48 @@ public class viewdictonary extends javax.swing.JFrame{
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)))
         );
+
+        jMenu4.setText("Insert");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
+        jMenuBar2.add(jMenu4);
+
+        jMenu3.setText("Edit");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(jMenu3);
+
+        jMenu9.setText("Delete");
+        jMenu9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu9MouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(jMenu9);
+
+        jMenu10.setText("Exit");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(jMenu10);
+
+        setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,27 +305,22 @@ public class viewdictonary extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jTextArea1.setText("");
-        if(!jTextField3.getText().equals(""))
-       {   
-           AcessDatabase data=new AcessDatabase();
-           String word=jTextField3.getText();
-           String a;
-            try {
-                a = data.readDatabase(word);
-                jTextArea1.append(word);
-                jTextArea1.append(a);
-            } catch (SQLException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
+        String varRun = jTextField3.getText().trim();
+        int i = 0;
+        for (Dictionary word : listDict) {
+            if (word.getWord().equals(varRun)) {
+                String wordDetail = word.getDetail();
+                String var1 = wordDetail.replaceAll("<C><F><I><N><Q>", "\n     ");
+                String var2 = var1.replaceAll("<br />", "\n     ");
+                String var3 = var2.replaceAll("</Q></N></I></F></C>", "");
+               jTextArea1.setText(word.getWord() + " : " + var3);
+                i = 1;
             }
-           
-       }
+        }
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null, "This word doesn't inside my dictionary.");
+            jTextField3.requestFocus();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -254,45 +334,76 @@ public class viewdictonary extends javax.swing.JFrame{
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
-        jTextArea1.setText("");
-         if(!jTextField3.getText().equals(""))
-       {   
-           AcessDatabase data=new AcessDatabase();
-           String word=jTextField3.getText();
-           String a;
-            try {
-                a = data.readDatabase(word);
-                 jTextArea1.append(word);
-                 jTextArea1.append(a);
-            } catch (SQLException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(viewdictonary.class.getName()).log(Level.SEVERE, null, ex);
+       String varRun = jTextField3.getText().trim();
+        int i = 0;
+        for (Dictionary word : listDict) {
+            if (word.getWord().equals(varRun)) {
+                String wordDetail = word.getDetail();
+                String var1 = wordDetail.replaceAll("<C><F><I><N><Q>", "\n     ");
+                String var2 = var1.replaceAll("<br />", "\n     ");
+                String var3 = var2.replaceAll("</Q></N></I></F></C>", "");
+               jTextArea1.setText(word.getWord() + " : " + var3);
+                i = 1;
             }
+        }
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null, "This word doesn't inside my dictionary.");
+            jTextField3.requestFocus();
+        }
 
-       }
+       
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        // TODO add your handling code here:
+        viewInsert insert =new viewInsert();
+        insert.openWindowInsert();
+    }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+        viewEdit edit=new viewEdit();
+        edit.openViewEdit();
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
+        // TODO add your handling code here:
+        viewDelete delete=new viewDelete();
+        delete.openViewDelete();
+    }//GEN-LAST:event_jMenu9MouseClicked
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        // TODO add your handling code here:
+         int click = JOptionPane.showConfirmDialog(null, "Do you want to exit.", "Question", JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
+    public void resetListDict() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        listDict = AcessDatabase.readDatabase();
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        
-        //</editor-fold>
-
-        /* Create and display the form */
+        try {
+            listDict = AcessDatabase.readDatabase();
+        } catch (SQLException ex) {
+            Logger.getLogger(viewdictionary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(viewdictionary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(viewdictionary.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(viewdictionary.class.getName()).log(Level.SEVERE, null, ex);
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewdictonary().setVisible(true);
+                new viewdictionary().setVisible(true);
           
             }
         });
@@ -306,10 +417,25 @@ public class viewdictonary extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
