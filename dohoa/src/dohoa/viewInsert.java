@@ -5,10 +5,14 @@
  */
 package dohoa;
 
+import static dohoa.viewdictionary.listDict;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,22 +22,28 @@ import javax.swing.JOptionPane;
 public class viewInsert extends javax.swing.JFrame {
   viewdictionary viewDictionary = new viewdictionary();
   AcessDatabase acessDatabase = new AcessDatabase();
-  NextId maxid=new NextId();
     /**
      * Creates new form viewInsert
      */
     public viewInsert() {
+         Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 4 + 450, screenHeight / 4-150);
+        this.setResizable(false);
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     public boolean insertElement(Dictionary dictionary) {
         try {
             Statement stmt = AcessDatabase.collectionDatabase().createStatement();
             String word = "'" + dictionary.getWord() + "'";
             String detail = "'" + dictionary.getDetail() + "'";
-            String id = maxid.maxId();
+            String id = "'" + String.valueOf(viewdictionary.listDict.get(listDict.size()-1).getId()+1) + "'";
             stmt.executeUpdate("insert into tbl_edict values (" + id + "," + word + "," + detail +");");            
             return true;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
         }
         return false;
@@ -157,13 +167,7 @@ public class viewInsert extends javax.swing.JFrame {
             super.dispose();
              try {
                  viewDictionary.resetListDict();
-             } catch (SQLException ex) {
-                 Logger.getLogger(viewInsert.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(viewInsert.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (InstantiationException ex) {
-                 Logger.getLogger(viewInsert.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (IllegalAccessException ex) {
+             } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                  Logger.getLogger(viewInsert.class.getName()).log(Level.SEVERE, null, ex);
              }
         }
@@ -181,9 +185,6 @@ public class viewInsert extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
    public void openWindowInsert() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -192,19 +193,11 @@ public class viewInsert extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(viewInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new viewInsert().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new viewInsert().setVisible(true);
         });
     }
 

@@ -5,10 +5,13 @@
  */
 package dohoa;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +25,14 @@ public class viewEdit extends javax.swing.JFrame {
      * Creates new form Edit
      */
     public viewEdit() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 4 + 450, screenHeight / 4-150);
+        this.setResizable(false);
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -64,6 +74,11 @@ public class viewEdit extends javax.swing.JFrame {
         });
 
         jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,14 +148,14 @@ public class viewEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
  public boolean updateElement(String word, String detail) {
         try {
-            Statement stmt = acessDatabase.collectionDatabase().createStatement();
-            String word1 = "'" + word + "'";
-            String detail1 = "'" + detail + "'";
-            stmt.executeUpdate("update tbl_edict set detail = " + detail1 + " where word = " + word1);
-            stmt.close();
-            acessDatabase.collectionDatabase().close();
+            try (Statement stmt = AcessDatabase.collectionDatabase().createStatement()) {
+                String word1 = "'" + word + "'";
+                String detail1 = "'" + detail + "'";
+                stmt.executeUpdate("update tbl_edict set detail = " + detail1 + " where word = " + word1);
+            }
+            AcessDatabase.collectionDatabase().close();
             return true;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -152,13 +167,7 @@ public class viewEdit extends javax.swing.JFrame {
             super.dispose();
             try {
                 viewDictionary.resetListDict();
-            } catch (SQLException ex) {
-                Logger.getLogger(viewEdit.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(viewEdit.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(viewEdit.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
+            } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                 Logger.getLogger(viewEdit.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
@@ -166,9 +175,14 @@ public class viewEdit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          int click = JOptionPane.showConfirmDialog(null, "Do you want to exit.", "Question", JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.YES_OPTION) {
+            super.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
  public void openViewEdit() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -177,19 +191,11 @@ public class viewEdit extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(viewEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new viewEdit().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new viewEdit().setVisible(true);
         });
     }
 
