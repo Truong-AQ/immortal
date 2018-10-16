@@ -1,0 +1,1 @@
+CreateObject("SAPI.SpVoice").Speak"women is a human is a dog is a cat"
