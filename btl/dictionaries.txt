@@ -1,9 +1,0 @@
-dog	con chó
-hello	xin chào
-pig	con heo
-school	trường học
-sea	đại dương
-search	tìm kiếm
-sky	bầu trời
-student	học sinh
-teacher	giáo viên
