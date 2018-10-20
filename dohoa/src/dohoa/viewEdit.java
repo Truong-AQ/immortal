@@ -56,6 +56,8 @@ public class viewEdit extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edit");
 
+        jPanel1.setBackground(new java.awt.Color(0, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setText("Word");
 

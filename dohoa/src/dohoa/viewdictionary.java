@@ -411,8 +411,9 @@ public class viewdictionary extends javax.swing.JFrame{
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
-        String word = jList1.getSelectedValue();
-        jTextField3.setText(word);
+         if(jList1.getSelectedValue() != null){
+            jTextField3.setText(jList1.getSelectedValue());
+        }
     }//GEN-LAST:event_jList1ValueChanged
      public void initData(String word) {
       DefaultListModel model = new DefaultListModel();
