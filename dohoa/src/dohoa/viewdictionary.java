@@ -145,7 +145,7 @@ public class viewdictionary extends javax.swing.JFrame{
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 255));
 
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\lap tring java\\dohoa\\Image\\icon5.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\github\\immortal\\dohoa\\Image\\seach2.png")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
