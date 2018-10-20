@@ -38,7 +38,7 @@ public class viewdictionary extends javax.swing.JFrame{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    	 jTextField2 = new javax.swing.JTextField();
+
         jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -216,7 +216,7 @@ public class viewdictionary extends javax.swing.JFrame{
 
         jTextArea1.setBackground(new java.awt.Color(255, 255, 204));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setWrapStyleWord(true);

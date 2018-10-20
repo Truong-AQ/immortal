@@ -64,6 +64,8 @@ public class viewDelete extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setText("Word");
 
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
         jButton1.setText("Delete");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

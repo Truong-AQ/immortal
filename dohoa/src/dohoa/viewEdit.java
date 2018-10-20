@@ -61,7 +61,10 @@ public class viewEdit extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel1.setText("Word");
 
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
