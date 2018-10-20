@@ -38,7 +38,7 @@ public class viewdictionary extends javax.swing.JFrame{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	 jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -140,7 +140,6 @@ public class viewdictionary extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DICTIONARY");
-        setMaximumSize(new java.awt.Dimension(700, 700));
 
         jPanel1.setName("\n"); // NOI18N
 
@@ -251,7 +250,9 @@ public class viewdictionary extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jMenu4.setText("Insert");
@@ -305,7 +306,7 @@ public class viewdictionary extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         pack();
@@ -331,6 +332,12 @@ public class viewdictionary extends javax.swing.JFrame{
             jTextField3.requestFocus();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {
+     }
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+     }
+     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+     }
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         // TODO add your handling code here:
