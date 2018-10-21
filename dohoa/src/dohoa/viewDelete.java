@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class viewDelete extends javax.swing.JFrame {
-     viewdictionary viewDictionary = new viewdictionary();
+     viewDictionary viewDictionary = new viewDictionary();
      AcessDatabase acessDatabase = new AcessDatabase();
     /**
      * Creates new form viewDelete

@@ -5,7 +5,7 @@
  */
 package dohoa;
 
-import static dohoa.viewdictionary.listDict;
+import static dohoa.viewDictionary.listDict;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class viewInsert extends javax.swing.JFrame {
-  viewdictionary viewDictionary = new viewdictionary();
+  viewDictionary viewDictionary = new viewDictionary();
   AcessDatabase acessDatabase = new AcessDatabase();
     /**
      * Creates new form viewInsert
@@ -40,7 +40,7 @@ public class viewInsert extends javax.swing.JFrame {
             Statement stmt = AcessDatabase.collectionDatabase().createStatement();
             String word = "'" + dictionary.getWord() + "'";
             String detail = "'" + dictionary.getDetail() + "'";
-            String id = "'" + String.valueOf(viewdictionary.listDict.get(listDict.size()-1).getId()+1) + "'";
+            String id = "'" + String.valueOf(viewDictionary.listDict.get(listDict.size()-1).getId()+1) + "'";
             stmt.executeUpdate("insert into tbl_edict values (" + id + "," + word + "," + detail +");");            
             return true;
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) {
@@ -158,7 +158,7 @@ public class viewInsert extends javax.swing.JFrame {
         // TODO add your handling code here:
          String word = jTextField1.getText();
         int i = 0;
-        for (Dictionary dict : viewdictionary.listDict) {
+        for (Dictionary dict : viewDictionary.listDict) {
             if (dict.getWord().equals(word)) {
                 i = 1;
             }

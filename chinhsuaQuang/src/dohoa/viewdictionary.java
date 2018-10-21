@@ -63,6 +63,7 @@ public class viewdictionary extends javax.swing.JFrame{
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 255));
 
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\github\\immortal\\chinhsuaQuang\\Image\\seach2.png")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -90,6 +91,7 @@ public class viewdictionary extends javax.swing.JFrame{
         jLabel4.setForeground(new java.awt.Color(240, 240, 240));
         jLabel4.setText("IMMORTAL");
 
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\github\\immortal\\chinhsuaQuang\\Image\\Speaker.png")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
