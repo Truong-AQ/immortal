@@ -338,7 +338,6 @@ public class viewdictionary extends javax.swing.JFrame{
      }
      private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
      }
-
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2MouseClicked
