@@ -1,1 +1,1 @@
-CreateObject("SAPI.SpVoice").Speak"quang"
+CreateObject("SAPI.SpVoice").Speak"thay"
