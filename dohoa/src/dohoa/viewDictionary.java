@@ -20,12 +20,12 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class viewdictionary extends javax.swing.JFrame{
+public class viewDictionary extends javax.swing.JFrame{
     
     public static List<Dictionary> listDict;
     public static viewInsert windowInsert = new viewInsert();
      public String var = "Hello";
-    public viewdictionary() {
+    public viewDictionary() {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
         int screenHeight = screenSize.height;
@@ -338,7 +338,6 @@ public class viewdictionary extends javax.swing.JFrame{
      }
      private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
      }
-
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2MouseClicked
@@ -448,10 +447,10 @@ public class viewdictionary extends javax.swing.JFrame{
         try {
             listDict = AcessDatabase.readDatabase();
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(viewdictionary.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(viewDictionary.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(() -> {
-            new viewdictionary().setVisible(true);
+            new viewDictionary().setVisible(true);
         });
   
     }
