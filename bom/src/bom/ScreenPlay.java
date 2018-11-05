@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * @author Genius
  */
 public class ScreenPlay extends JFrame{
-    final static int sizeIcon = 16, sizeTimeAndScore = 20;
+    final static int sizeIcon = 32, sizeTimeAndScore = 20;
     private int width, height = 39;
     public static Character[][] allCharacter;
     Level lv;

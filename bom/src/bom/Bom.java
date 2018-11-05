@@ -14,7 +14,7 @@ import static java.lang.Math.random;
 public class Bom {
 
     /**
-     * @param args the command line arguments
+     * @param args the cosmmand line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
