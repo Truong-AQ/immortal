@@ -120,7 +120,7 @@ abstract class Monster extends MotionCharacter{
     }
 }
 class Bomber extends MotionCharacter{
-    private final int step = sizeIcon/4, nStepLimitGo = 2, nStepLimPutBom = 1;
+    private final int step = sizeIcon/4, nStepLimitGo=0, nStepLimPutBom = 1;
     public static Vector <Bomb> boms = new Vector();
     //thiet lap tat ca hinh anh hoat hinh cua bomber
     private final ImageIcon[] Up = {
